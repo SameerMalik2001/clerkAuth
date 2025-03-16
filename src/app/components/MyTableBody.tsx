@@ -15,12 +15,15 @@ const MyTableBody = ({ cui }: { cui: string }) => {
     try {
       const res = await getTodos(cui);
       setData(res);
+      console.log(res);
       updateTableRefresh(false);
       updateTodoLength(res?.length)
     } catch (error) {
       console.log(error);
     }
   };
+
+  console.log(data);
 
   useEffect(() => {
     if (tableRefresh) {
