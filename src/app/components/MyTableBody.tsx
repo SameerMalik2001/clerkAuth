@@ -14,6 +14,8 @@ const MyTableBody = ({ cui }: { cui: string }) => {
   const getData = async () => {
     try {
       const res = await getTodos(cui);
+      debugger;
+      console.log("after graph ql API res.todos: ", res);
       if(res.length > 0) {
         setData(res);
         updateTableRefresh(false);

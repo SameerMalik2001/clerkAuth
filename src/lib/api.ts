@@ -43,7 +43,10 @@ export const getTodos = async (clerkUserId: string): Promise<Todo[]> => {
       }
     }
   `;
-  return fetchGraphQL(query, { clerkUserId }).then((res) => res.todos);
+  return fetchGraphQL(query, { clerkUserId }).then((res) => {
+    console.log("in graph ql API raw : ",res);
+    return res.todos;
+  });
 };
 
 // Fetch a single todo
