@@ -11,30 +11,8 @@ const MyTableBody = ({ cui }: { cui: string }) => {
   const [data, setData] = useState<Todo[]>([]);
   const { tableRefresh, updateTableRefresh, checkedAllTodo, updateCheckedAllTodoIds, updateTodoLength } = useStore();
 
-  const getData = async () => {
-    try {
-      const res: Todo[] = await getTodos(cui);
-      console.log("after graph ql API res.todos: ", res);
-      console.log("todo length ", res.length, "conditon:",  res.length > 0);
-      if (res.length > 0) {
-        console.log("Before setting data: ", data, res);
-        setData((prev: Todo[]) => {
-          const temp: Todo[] = [...res]
-          console.log("old",prev);
-          console.log("new",temp);
-          return temp;
-        });
-        console.log("After setting data: ", data, res);
-        updateTableRefresh(false);
-        updateTodoLength(res?.length);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(()=> {
-    console.log(data);
+    console.log("data: ", data);
   }, [data])
 
   useEffect(() => {
@@ -48,6 +26,30 @@ const MyTableBody = ({ cui }: { cui: string }) => {
       updateCheckedAllTodoIds(data?.map(todo => todo.id));
     }
   }, [checkedAllTodo])
+  
+  const getData = async () => {
+    try {
+      const res: Todo[] = await getTodos(cui);
+      console.log("after graph ql API res.todos: ", res);
+      console.log("todo length ", res.length, "conditon:",  res.length > 0);
+      if (res.length > 0) {
+        console.log("Before setting data: ", data, res);
+        setData((prev: Todo[]) => {
+          const temp: Todo[] = JSON.parse(JSON.stringify(res));
+          console.log("old",prev);
+          console.log("new",temp);
+          return temp;
+        });
+        console.log("After setting data: ", data, res);
+        updateTableRefresh(false);
+        updateTodoLength(res?.length);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  
 
   return (
     <TableBody>
