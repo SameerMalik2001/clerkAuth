@@ -29,7 +29,9 @@ const MyTableBody = ({ cui }: { cui: string }) => {
     }
   };
 
-  console.log(data);
+  useEffect(()=> {
+    console.log(data);
+  }, [data])
 
   useEffect(() => {
     if (tableRefresh) {
