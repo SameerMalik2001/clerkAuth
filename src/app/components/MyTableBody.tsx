@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { TableBody, TableCell } from "@/components/ui/table";
 import { getTodos, Todo } from "@/lib/api";
@@ -14,7 +14,6 @@ const MyTableBody = ({ cui }: { cui: string }) => {
   const getData = async () => {
     try {
       const res: Todo[] = await getTodos(cui);
-      debugger;
       console.log("after graph ql API res.todos: ", res);
       console.log("todo length ", res.length, "conditon:",  res.length > 0);
       if (res.length > 0) {

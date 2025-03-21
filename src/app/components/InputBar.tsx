@@ -3,7 +3,6 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { createTodo } from '@/lib/api';
-import { useParams, useSearchParams } from 'next/navigation';
 import { FC, useState } from 'react';
 import { toast } from 'sonner';
 import { useStore } from '../store/useStore';
