@@ -19,9 +19,14 @@ const MyTableBody = ({ cui }: { cui: string }) => {
       console.log("todo length ", res.length, "conditon:",  res.length > 0);
       if (res.length > 0) {
         console.log("Before setting data: ", data, res);
-        setData([...res]);
+        setData((prev: Todo[]) => {
+          const temp: Todo[] = [...res]
+          console.log("old",prev);
+          console.log("new",temp);
+          return temp;
+        });
         console.log("After setting data: ", data, res);
-        setTimeout(() => updateTableRefresh(false), 0);
+        updateTableRefresh(false);
         updateTodoLength(res?.length);
       }
     } catch (error) {
