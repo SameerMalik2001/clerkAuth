@@ -13,11 +13,14 @@ const MyTableBody = ({ cui }: { cui: string }) => {
 
   const getData = async () => {
     try {
-      const res = await getTodos(cui);
+      const res: Todo[] = await getTodos(cui);
       debugger;
       console.log("after graph ql API res.todos: ", res);
-      if(res.length > 0) {
-        setData(res);
+      console.log("todo length ", res.length, "conditon:",  res.length > 0);
+      if (res.length > 0) {
+        console.log("Before setting data: ", data);
+        setData([...res]);
+        console.log("After setting data: ", data);
         updateTableRefresh(false);
         updateTodoLength(res?.length);
       }
