@@ -8,7 +8,7 @@ import { useStore } from "../store/useStore";
 import BodyWrapper from "./BodyWrapper";
 
 const MyTableBody = ({ cui }: { cui: string }) => {
-  const [data, setData] = useState<Todo[] | null>(null);
+  const [data, setData] = useState<Todo[]>([]);
   const { tableRefresh, updateTableRefresh, checkedAllTodo, updateCheckedAllTodoIds, updateTodoLength } = useStore();
 
   const getData = async () => {
@@ -18,10 +18,10 @@ const MyTableBody = ({ cui }: { cui: string }) => {
       console.log("after graph ql API res.todos: ", res);
       console.log("todo length ", res.length, "conditon:",  res.length > 0);
       if (res.length > 0) {
-        console.log("Before setting data: ", data);
+        console.log("Before setting data: ", data, res);
         setData([...res]);
-        console.log("After setting data: ", data);
-        updateTableRefresh(false);
+        console.log("After setting data: ", data, res);
+        setTimeout(() => updateTableRefresh(false), 0);
         updateTodoLength(res?.length);
       }
     } catch (error) {
@@ -45,7 +45,7 @@ const MyTableBody = ({ cui }: { cui: string }) => {
 
   return (
     <TableBody>
-      {data && data.length > 0 ? (
+      {data.length > 0 ? (
         data.map((row: Todo) => (
           <BodyWrapper row={row} key={row.id}>
             <TableCell className="capitalize">{row.title}</TableCell>
