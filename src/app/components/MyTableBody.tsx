@@ -14,10 +14,11 @@ const MyTableBody = ({ cui }: { cui: string }) => {
   const getData = async () => {
     try {
       const res = await getTodos(cui);
-      setData(res);
-      console.log(res);
-      updateTableRefresh(false);
-      updateTodoLength(res?.length)
+      if(res.length > 0) {
+        setData(res);
+        updateTableRefresh(false);
+        updateTodoLength(res?.length);
+      }
     } catch (error) {
       console.log(error);
     }
